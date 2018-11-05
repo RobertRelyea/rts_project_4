@@ -1,0 +1,20 @@
+#include <inttypes.h>
+#include <math.h>
+#include <stdio.h>
+#include <time.h>
+
+int main(int argc, char *argv[])
+{
+	long            ms; // Milliseconds
+	time_t          s;  // Seconds
+	struct timespec spec;
+
+	clock_gettime(CLOCK_REALTIME, &spec);
+
+	s  = spec.tv_sec / 1e6;
+
+	int ms_int = spec.tv_nsec; // Convert nanoseconds to milliseconds
+
+
+	printf("Current time: %"PRIdMAX".%03ld seconds since the Epoch\n", (intmax_t)s, (intmax_t)ms_int);
+}

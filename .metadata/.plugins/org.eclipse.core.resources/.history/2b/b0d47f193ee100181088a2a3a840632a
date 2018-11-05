@@ -1,0 +1,41 @@
+#include <inttypes.h>
+#include <math.h>
+#include <stdio.h>
+#include <time.h>
+
+int main(int argc, char *argv[])
+{
+	long            ms; // Milliseconds
+	time_t          s;  // Seconds
+	float start_time;
+	float current_time = 0;
+	struct timespec spec;
+	struct timespec current;
+
+	clock_gettime(CLOCK_REALTIME, &spec);
+
+	s  = spec.tv_sec;
+	int ms_int = spec.tv_nsec / 1e6;// Convert nanoseconds to milliseconds
+	start_time = s + (ms_int / 1000.0);
+	current_time= start_time;
+	printf("start\r\n");
+
+	while((current_time-start_time < 1.00))
+	{
+		clock_gettime(CLOCK_REALTIME, &current);
+		s  = current.tv_sec;
+		ms_int = current.tv_nsec / 1e6;
+		current_time = s + (ms_int / 1000.0);
+
+		printf("Current time: %f Start Time: %f \n", current_time, start_time);
+	}
+	printf("end\r\n");
+
+	printf("Current time: %"PRIdMAX".%03ld seconds since the Epoch\n", (intmax_t)s, (intmax_t)ms_int);
+}
+
+double get_elapsed_time(struct timespec *before, struct timespec *after){
+  double deltat_s  = after->tv_sec - before->tv_sec;
+  double deltat_ns = after->tv_nsec - before->tv_nsec;
+  return deltat_s + deltat_ns*1e-9;
+}

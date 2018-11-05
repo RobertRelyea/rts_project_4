@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 
 	printf("start\r\n");
 
-	while(time_elapsed(&start, &current) < 5.0)//(current_time-start_time < 1.00))
+	while(time_elapsed(&start, &current) < 1.0)//(current_time-start_time < 1.00))
 	{
 		clock_gettime(CLOCK_REALTIME, &current);
 	}
