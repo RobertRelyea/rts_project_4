@@ -16,14 +16,12 @@ double time_ns = current->tv_nsec - start->tv_nsec;
 return time_s + time_ns*1e-9;
 }
 
-// Element inside queue
 typedef struct node_t
 {
 	int cust_id;
 	node* next;
 }node;
 
-// Queue structure, maintains queue size and head/tail node pointers
 typedef struct queue_t
 {
 	int size;
@@ -31,38 +29,13 @@ typedef struct queue_t
 	node* tail;
 }queue;
 
-// Initialize queue structure
-// Allocate memory for queue structure
-// Initialize size to zero, set head and tail pointers to zero
 void initialize_queue(queue* queue_ptr)
 {
-	queue_ptr = malloc(sizeof(queue));
-	queue_ptr->size = 0;
-	queue_ptr->head = 0;
-	queue_ptr->tail = 0;
+	queue_input =
+	queue_input->size = 0;
 }
 
-void enqueue(queue* queue_ptr, int cust_id)
-{
-	node* node_ptr = malloc(sizeof(node));
-
-	node_ptr->cust_id = cust_id;
-	// Last element in queue
-	node_ptr->next = 0;
-
-	// Check if the queue is empty
-	if(queue_ptr->head == 0)
-	{
-		// Node becomes the head of the queue
-		queue_ptr->head = node_ptr;
-	}
-	else // Queue not empty, set node as next for old tail
-	{
-	queue_ptr->tail->next = node_ptr;
-	}
-	queue_ptr->tail= node_ptr;
-}
-int dequeue()
+void enqueue(queue* queue_ptr, node* )
 {
 
 }

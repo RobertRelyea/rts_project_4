@@ -47,24 +47,6 @@ void enqueue(queue* queue_ptr, int cust_id)
 	node* node_ptr = malloc(sizeof(node));
 
 	node_ptr->cust_id = cust_id;
-	// Last element in queue
-	node_ptr->next = 0;
-
-	// Check if the queue is empty
-	if(queue_ptr->head == 0)
-	{
-		// Node becomes the head of the queue
-		queue_ptr->head = node_ptr;
-	}
-	else // Queue not empty, set node as next for old tail
-	{
-	queue_ptr->tail->next = node_ptr;
-	}
-	queue_ptr->tail= node_ptr;
-}
-int dequeue()
-{
-
 }
 
 int intervals[50];

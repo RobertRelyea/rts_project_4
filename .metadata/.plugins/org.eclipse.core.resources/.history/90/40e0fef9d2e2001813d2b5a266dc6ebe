@@ -56,15 +56,6 @@ void enqueue(queue* queue_ptr, int cust_id)
 		// Node becomes the head of the queue
 		queue_ptr->head = node_ptr;
 	}
-	else // Queue not empty, set node as next for old tail
-	{
-	queue_ptr->tail->next = node_ptr;
-	}
-	queue_ptr->tail= node_ptr;
-}
-int dequeue()
-{
-
 }
 
 int intervals[50];

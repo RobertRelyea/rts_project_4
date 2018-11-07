@@ -1,0 +1,49 @@
+#include <inttypes.h>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <pthread.h>
+#include <unistd.h>
+
+int queued_customers = 0;
+
+pthread_mutex_t queue_locker;
+
+double time_elapsed(struct timespec *start, struct timespec *current){
+double time_s  = current->tv_sec - start->tv_sec;
+double time_ns = current->tv_nsec - start->tv_nsec;
+return time_s + time_ns*1e-9;
+}
+
+int main(int argc, char *argv[])
+{
+	pthread_mutex_init(&queue_locker,NULL);
+	struct timespec start;
+	struct timespec current;
+
+	clock_gettime(CLOCK_REALTIME, &start);
+	clock_gettime(CLOCK_REALTIME, &current);
+
+	printf("start\r\n");
+
+	while(time_elapsed(&start, &current) < 5.0)//(current_time-start_time < 1.00))
+	{
+		useconds_t interval = (100 + (srand(1) % 300))*1000;
+		usleep(interval);
+		pthread_mutex_lock(&queue_locker);
+		queued_customers++;
+		pthread_mutex_unlock(&queue_locker);
+
+
+		clock_gettime(CLOCK_REALTIME, &current);
+	}
+	printf("end\r\n");
+	pthread_mutex_lock(&queue_locker);
+	printf("%d\r\n", queued_customers);
+	pthread_mutex_unlock(&queue_locker);
+
+	return 0;
+}
+
+
