@@ -26,32 +26,51 @@ void *enqueueThread(void *arg)
 	int i;
 	for(i=0;i<10;i++)
 	{
+		pthread_mutex_lock(&queue_locker);
 		enqueue(queue_ptr, i, 0);
+		pthread_mutex_unlock(&queue_locker);
 		printf("%d\r\n",i);
 	}
 	printf("\n Size of queue : %d\r\n",queue_ptr->size);
 }
 
-int main(int argc, char *argv[])
+void *dequeueThread(void *arg)
 {
 	int deq_val;
+	while(queue_ptr->size)
+		{
+		printf("\n Size of queue : %d\r\n",queue_ptr->size);
+			pthread_mutex_lock(&queue_locker);
+			deq_val=dequeue(queue_ptr);
+			pthread_mutex_unlock(&queue_locker);
+			printf ("\n Dequeue value is: %d\r \n", deq_val);
+		}
+	printf("\n Size of queue : %d\r\n",queue_ptr->size);
+}
+
+int main(int argc, char *argv[])
+{
+	pthread_mutex_init(&queue_locker,NULL);
+	int deq_val;
+	pthread_mutex_lock(&queue_locker);
 	queue_ptr = initialize_queue();
+	pthread_mutex_unlock(&queue_locker);
 
 
 	pthread_t enq_thread;
+	pthread_t deq_thread;
 	pthread_create(&enq_thread, NULL, enqueueThread, NULL);
+	pthread_create(&deq_thread, NULL, dequeueThread, NULL);
 	// Do some stuff
 	pthread_join(enq_thread, NULL);
+	pthread_join(deq_thread, NULL);
 
-	while(queue_ptr->size)
-	{
-		deq_val=dequeue(queue_ptr);
-		printf ("\n Dequeue value is: %d\r \n", deq_val);
-	}
+	pthread_mutex_lock(&queue_locker);
 	free_queue(queue_ptr);
+	pthread_mutex_unlock(&queue_locker);
 }
-	/*pthread_mutex_init(&queue_locker,NULL);
-	struct timespec start;
+
+	/*struct timespec start;
 	struct timespec current;
 
 	clock_gettime(CLOCK_REALTIME, &start);
