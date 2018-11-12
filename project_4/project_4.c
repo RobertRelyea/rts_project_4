@@ -5,6 +5,7 @@
 #include <time.h>
 #include <pthread.h>
 #include <unistd.h>
+#include "queue.h"
 
 int queued_customers = 0;
 
@@ -16,62 +17,40 @@ double time_ns = current->tv_nsec - start->tv_nsec;
 return time_s + time_ns*1e-9;
 }
 
-// Element inside queue
-typedef struct node_t
-{
-	int cust_id;
-	node* next;
-}node;
-
-// Queue structure, maintains queue size and head/tail node pointers
-typedef struct queue_t
-{
-	int size;
-	node* head;
-	node* tail;
-}queue;
-
-// Initialize queue structure
-// Allocate memory for queue structure
-// Initialize size to zero, set head and tail pointers to zero
-void initialize_queue(queue* queue_ptr)
-{
-	queue_ptr = malloc(sizeof(queue));
-	queue_ptr->size = 0;
-	queue_ptr->head = 0;
-	queue_ptr->tail = 0;
-}
-
-void enqueue(queue* queue_ptr, int cust_id)
-{
-	node* node_ptr = malloc(sizeof(node));
-
-	node_ptr->cust_id = cust_id;
-	// Last element in queue
-	node_ptr->next = 0;
-
-	// Check if the queue is empty
-	if(queue_ptr->head == 0)
-	{
-		// Node becomes the head of the queue
-		queue_ptr->head = node_ptr;
-	}
-	else // Queue not empty, set node as next for old tail
-	{
-	queue_ptr->tail->next = node_ptr;
-	}
-	queue_ptr->tail= node_ptr;
-}
-int dequeue()
-{
-
-}
-
 int intervals[50];
+queue *queue_ptr;
+
+// Enqueueing thread
+void *enqueueThread(void *arg)
+{
+	int i;
+	for(i=0;i<10;i++)
+	{
+		enqueue(queue_ptr, i, 0);
+		printf("%d\r\n",i);
+	}
+	printf("\n Size of queue : %d\r\n",queue_ptr->size);
+}
 
 int main(int argc, char *argv[])
 {
-	pthread_mutex_init(&queue_locker,NULL);
+	int deq_val;
+	queue_ptr = initialize_queue();
+
+
+	pthread_t enq_thread;
+	pthread_create(&enq_thread, NULL, enqueueThread, NULL);
+	// Do some stuff
+	pthread_join(enq_thread, NULL);
+
+	while(queue_ptr->size)
+	{
+		deq_val=dequeue(queue_ptr);
+		printf ("\n Dequeue value is: %d\r \n", deq_val);
+	}
+	free_queue(queue_ptr);
+}
+	/*pthread_mutex_init(&queue_locker,NULL);
 	struct timespec start;
 	struct timespec current;
 
@@ -106,7 +85,7 @@ int main(int argc, char *argv[])
 		printf("%d\r\n", intervals[i]);
 	}
 
-	return 0;
-}
+	return 0;*/
+
 
 

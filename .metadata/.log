@@ -156,3 +156,178 @@ HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.e
 !MESSAGE Could not find view: org.eclipse.ui.internal.introview
 !SUBENTRY 1 org.eclipse.core.runtime 0 0 2018-11-07 15:02:04.480
 !MESSAGE OK
+!SESSION 2018-11-12 15:12:09.441 -----------------------------------------------
+eclipse.buildId=201006232051
+java.version=1.5.0_11
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.equinox.p2.repository 4 0 2018-11-12 15:12:09.951
+!MESSAGE ProvisioningEventBus could not be obtained. Metadata caches may not be cleaned up properly.
+
+!ENTRY org.eclipse.core.resources 2 10035 2018-11-12 15:12:11.682
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.ui 4 4 2018-11-12 15:12:15.963
+!MESSAGE Could not create view: 'org.eclipse.ui.internal.introview'.
+
+!ENTRY org.eclipse.ui.workbench 2 0 2018-11-12 15:12:17.295
+!MESSAGE A handler conflict occurred.  This may disable some commands.
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2018-11-12 15:12:17.295
+!MESSAGE Conflict for 'AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction':
+HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
+	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@18abc7b),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@18abc7b)),sourcePriority=16640)
+HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
+	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@18abc7b),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@18abc7b)),sourcePriority=16640)
+
+!ENTRY org.eclipse.ui 4 0 2018-11-12 15:12:17.381
+!MESSAGE Problems occurred restoring workbench.
+!SUBENTRY 1 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
+!MESSAGE 
+!SUBENTRY 1 org.eclipse.core.runtime 0 0 2018-11-12 15:12:17.381
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.core.runtime 0 0 2018-11-12 15:12:17.381
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.core.runtime 0 0 2018-11-12 15:12:17.381
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.ui 4 0 2018-11-12 15:12:17.381
+!MESSAGE Unable to restore perspective: Workspace - C/C++.
+!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
+!MESSAGE Problems occurred restoring perspective.
+!SUBENTRY 3 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 4 0 2018-11-12 15:12:17.381
+!MESSAGE Could not find view: org.eclipse.ui.internal.introview
+!SUBENTRY 1 org.eclipse.core.runtime 0 0 2018-11-12 15:12:17.381
+!MESSAGE OK
+
+!ENTRY org.eclipse.cdt.ui 4 4 2018-11-12 16:25:02.177
+!MESSAGE Error
+!STACK 0
+org.eclipse.jface.text.BadLocationException
+	at org.eclipse.jface.text.AbstractDocument.get(AbstractDocument.java:1004)
+	at org.eclipse.core.internal.filebuffers.SynchronizableDocument.get(SynchronizableDocument.java:140)
+	at org.eclipse.cdt.internal.ui.editor.CEditor$BracketInserter.isInsideStringInPreprocessorDirective(CEditor.java:715)
+	at org.eclipse.cdt.internal.ui.editor.CEditor$BracketInserter.verifyKey(CEditor.java:645)
+	at org.eclipse.jface.text.TextViewer$VerifyKeyListenersManager.verifyKey(TextViewer.java:489)
+	at org.eclipse.swt.custom.StyledTextListener.handleEvent(StyledTextListener.java:62)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1027)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1012)
+	at org.eclipse.swt.widgets.Widget.notifyListeners(Widget.java:770)
+	at org.eclipse.swt.custom.StyledText.handleKeyDown(StyledText.java:5840)
+	at org.eclipse.swt.custom.StyledText$7.handleEvent(StyledText.java:5542)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1027)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1012)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1040)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1036)
+	at org.eclipse.swt.widgets.Widget.wmChar(Widget.java:1368)
+	at org.eclipse.swt.widgets.Control.WM_CHAR(Control.java:4053)
+	at org.eclipse.swt.widgets.Canvas.WM_CHAR(Canvas.java:346)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3946)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:342)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4619)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2411)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3501)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2405)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2369)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2221)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:500)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:493)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:113)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:194)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:368)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:559)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:514)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1311)
+
+!ENTRY org.eclipse.cdt.ui 4 4 2018-11-12 16:25:03.777
+!MESSAGE Error
+!STACK 0
+org.eclipse.jface.text.BadLocationException
+	at org.eclipse.jface.text.AbstractDocument.get(AbstractDocument.java:1004)
+	at org.eclipse.core.internal.filebuffers.SynchronizableDocument.get(SynchronizableDocument.java:140)
+	at org.eclipse.cdt.internal.ui.editor.CEditor$BracketInserter.isInsideStringInPreprocessorDirective(CEditor.java:715)
+	at org.eclipse.cdt.internal.ui.editor.CEditor$BracketInserter.verifyKey(CEditor.java:645)
+	at org.eclipse.jface.text.TextViewer$VerifyKeyListenersManager.verifyKey(TextViewer.java:489)
+	at org.eclipse.swt.custom.StyledTextListener.handleEvent(StyledTextListener.java:62)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1027)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1012)
+	at org.eclipse.swt.widgets.Widget.notifyListeners(Widget.java:770)
+	at org.eclipse.swt.custom.StyledText.handleKeyDown(StyledText.java:5840)
+	at org.eclipse.swt.custom.StyledText$7.handleEvent(StyledText.java:5542)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1027)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1012)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1040)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1036)
+	at org.eclipse.swt.widgets.Widget.wmChar(Widget.java:1368)
+	at org.eclipse.swt.widgets.Control.WM_CHAR(Control.java:4053)
+	at org.eclipse.swt.widgets.Canvas.WM_CHAR(Canvas.java:346)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3946)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:342)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4619)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2411)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3501)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2405)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2369)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2221)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:500)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:493)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:113)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:194)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:368)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:559)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:514)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1311)
