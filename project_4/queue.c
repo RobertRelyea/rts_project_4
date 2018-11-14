@@ -40,11 +40,8 @@ void enqueue(queue* queue_ptr, int cust_id, int time_interval)
 		queue_ptr->tail->next = node_ptr;
 	}
 	queue_ptr->tail= node_ptr;
-
 	queue_ptr->size++;
-
 }
-
 
 int dequeue(queue *queue_ptr)
 {
@@ -61,11 +58,20 @@ int dequeue(queue *queue_ptr)
 	return ret_val;
 }
 
+void print_queue (queue *queue_ptr)
+{
+	node *node_ptr;
+	for (node_ptr= queue_ptr->head ; node_ptr!=0 ; node_ptr=node_ptr->next)
+	{
+		printf ("\nQueue value: %d\r\n \n Interval: %d\r" , node_ptr->cust_id,node_ptr->time_interval);
+	}
+}
+
 void free_queue (queue* queue_ptr)
 {
 	while (queue_ptr->size)
 	{
-	dequeue(queue_ptr);
+		dequeue(queue_ptr);
 	}
 	free(queue_ptr);
 }
