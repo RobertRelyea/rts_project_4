@@ -8,8 +8,8 @@
 #include <unistd.h>
 #include "queue.h"
 
-#define NUM_TELLERS (4)
-#define SIM_TIME (42) // 7 hr * 60 mins/hr * 0.1 seconds/min = 42
+#define NUM_TELLERS (3)
+#define SIM_TIME (5) // 7 hr * 60 mins/hr * 0.1 seconds/min = 42
 
 // Shared variable mutexes
 pthread_mutex_t cust_locker;
@@ -28,6 +28,16 @@ queue *old_cust_queue;
 // Teller threads
 pthread_t teller_threads[NUM_TELLERS];
 
+// Teller status
+//struct teller_status
+//{
+//	struct timespec next_break;
+//	useconds_t break_length;
+//	int is_free;
+//	sem_t wake;
+//};
+//struct teller_status teller_status_array[NUM_TELLERS];
+
 // Teller arguments
 struct teller_args
 {
@@ -39,6 +49,7 @@ struct teller_args teller_arg_array[NUM_TELLERS];
 int max_queue_depth = 0;
 
 
+// Returns the difference between two timespecs in seconds
 double time_elapsed(struct timespec *start, struct timespec *current)
 {
 	double time_s  = current->tv_sec - start->tv_sec;
@@ -83,6 +94,7 @@ void print_stats()
 
 }
 
+
 struct timespec* gen_break_time()
 {
 	// Make some room for a timespec
@@ -94,6 +106,7 @@ struct timespec* gen_break_time()
 	return ts_ptr;
 }
 
+
 useconds_t gen_break_length()
 {
 	// Generate break length for teller
@@ -102,13 +115,11 @@ useconds_t gen_break_length()
 }
 
 //Teller thread
-void *Teller (void *arg)
+void *teller (void *arg)
 {
 	struct timespec current, start;
 	struct teller_args *my_args;
 	my_args = (struct teller_args *) arg;
-
-	struct timespec* next_break = gen_break_time();
 
 
 	// Run teller thread
@@ -122,18 +133,18 @@ void *Teller (void *arg)
 
 		// Dequeue customer from queue
 		pthread_mutex_lock(&cust_locker);
-		node* customer = dequeue(cust_queue);
-		pthread_mutex_unlock(&cust_locker);
-
 		// If there are no customers in the queue, exit
-		if(customer == 0)
+		if(cust_queue->size == 0)
 		{
+			pthread_mutex_unlock(&cust_locker);
 			// Post to cust_count semaphore to pass the message to the
 			// other threads
 			sem_post(&cust_count_sem);
 			// Exit thread
 			return;
 		}
+		node* customer = dequeue(cust_queue);
+		pthread_mutex_unlock(&cust_locker);
 
 		// Retrieve current time
 		clock_gettime(CLOCK_REALTIME, &current);
@@ -157,6 +168,12 @@ void *Teller (void *arg)
 }
 
 
+// Distributes tasks amongst all tellers and handles teller breaks.
+//void *teller_arbiter(void* args)
+//{
+//
+//}
+
 int main(int argc, char *argv[])
 {
     // Initialize Mutexes
@@ -176,13 +193,13 @@ int main(int argc, char *argv[])
 	pthread_mutex_unlock(&old_cust_locker);
 
 	// Start threads
-	int teller = 0;
-	for(;teller < NUM_TELLERS; ++teller)
+	int teller_idx = 0;
+	for(;teller_idx < NUM_TELLERS; ++teller_idx)
 	{
-		teller_arg_array[teller].teller_id = teller + 1;
+		teller_arg_array[teller_idx].teller_id = teller_idx + 1;
 
-		pthread_create(&teller_threads[teller], NULL, Teller,
-				       (void *) &teller_arg_array[teller]);
+		pthread_create(&teller_threads[teller_idx], NULL, teller,
+				       (void *) &teller_arg_array[teller_idx]);
 	}
 
 	// Timekeeping
@@ -229,11 +246,11 @@ int main(int argc, char *argv[])
 	// Close bank
 	sem_post(&cust_count_sem);
 
-	teller = 0;
-	for(;teller < NUM_TELLERS; ++teller)
+	teller_idx = 0;
+	for(;teller_idx < NUM_TELLERS; ++teller_idx)
 	{
-		pthread_join(teller_threads[teller], NULL);
-		printf("Teller %d joined\n", teller + 1);
+		pthread_join(teller_threads[teller_idx], NULL);
+		printf("Teller %d joined\n", teller_idx + 1);
 	}
 
 	pthread_mutex_lock(&cust_locker);
