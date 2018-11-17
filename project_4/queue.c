@@ -11,7 +11,7 @@
 // Returns a pointer to the newly allocated node.
 node* make_node(int cust_id, useconds_t service_time)
 {
-	node* node_ptr = malloc(sizeof(node));
+	node* node_ptr = (node*)malloc(sizeof(node));
 	node_ptr->cust_id = cust_id;
 	node_ptr->teller_id = 0;
 	node_ptr->service_time = service_time;
@@ -33,7 +33,7 @@ void free_node(node* node_ptr)
 queue* initialize_queue(void)
 {
 	queue *queue_ptr;
-	queue_ptr = malloc(sizeof(queue));
+	queue_ptr = (queue*)malloc(sizeof(queue));
 	queue_ptr->size = 0;
 	queue_ptr->head = 0;
 	queue_ptr->tail = 0;
@@ -77,12 +77,16 @@ node* dequeue(queue *queue_ptr)
 
 void print_queue (queue *queue_ptr)
 {
+	if (queue_ptr->size == 0)
+		printf("<empty queue>\n");
+
 	node *node_ptr;
-	for (node_ptr= queue_ptr->head ; node_ptr!=0 ; node_ptr=node_ptr->next)
+	for (node_ptr= queue_ptr->head ; node_ptr!=0 ;
+	     node_ptr=node_ptr->next)
 	{
 		printf("Queue value: %d", node_ptr->cust_id);
 		printf("\tTeller: %d",node_ptr->teller_id);
-		printf("\tInterval: %d",node_ptr->service_time);
+		printf("\tService Time: %d",node_ptr->service_time);
 		printf("\tQueue Time: %f\n",node_ptr->queue_time);
 	}
 }
@@ -104,11 +108,93 @@ int teller_served(queue* queue_ptr, int teller_id)
 {
 	node *node_ptr;
 	int teller_count = 0;
-	for (node_ptr=queue_ptr->head ; node_ptr!=0 ; node_ptr=node_ptr->next)
+	for (node_ptr=queue_ptr->head ; node_ptr!=0 ;
+	     node_ptr=node_ptr->next)
 	{
 		if (node_ptr->teller_id == teller_id)
 			teller_count++;
 	}
 
 	return teller_count;
+}
+
+double average_queue_time(queue* queue_ptr)
+{
+	node *node_ptr;
+	double queue_time = 0.0;
+	for (node_ptr=queue_ptr->head ; node_ptr!=0 ;
+		 node_ptr=node_ptr->next)
+	{
+		queue_time += node_ptr->queue_time;
+	}
+
+	return queue_time / queue_ptr->size;
+}
+
+double max_queue_time(queue* queue_ptr)
+{
+	node *node_ptr;
+	double queue_time = 0.0;
+	for (node_ptr=queue_ptr->head ; node_ptr!=0 ;
+		 node_ptr=node_ptr->next)
+	{
+		if (node_ptr->queue_time > queue_time)
+			queue_time = node_ptr->queue_time;
+	}
+
+	return queue_time;
+}
+
+double average_teller_wait_time(queue* queue_ptr)
+{
+	node *node_ptr;
+	double teller_wait_time = 0.0;
+	for (node_ptr=queue_ptr->head ; node_ptr!=0 ;
+		 node_ptr=node_ptr->next)
+	{
+		teller_wait_time += node_ptr->teller_wait_time;
+	}
+
+	return teller_wait_time / queue_ptr->size;
+}
+
+double max_teller_wait_time(queue* queue_ptr)
+{
+	node *node_ptr;
+	double teller_wait_time = 0.0;
+	for (node_ptr=queue_ptr->head ; node_ptr!=0 ;
+		 node_ptr=node_ptr->next)
+	{
+		if (node_ptr->teller_wait_time > teller_wait_time)
+			teller_wait_time = node_ptr->teller_wait_time;
+	}
+
+	return teller_wait_time;
+}
+
+double average_service_time(queue* queue_ptr)
+{
+	node *node_ptr;
+	double service_time = 0.0;
+	for (node_ptr=queue_ptr->head ; node_ptr!=0 ;
+		 node_ptr=node_ptr->next)
+	{
+		service_time += node_ptr->service_time;
+	}
+
+	return service_time / queue_ptr->size * 1e-6;
+}
+
+double max_service_time(queue* queue_ptr)
+{
+	node *node_ptr;
+	double service_time = 0.0;
+	for (node_ptr=queue_ptr->head ; node_ptr!=0 ;
+		 node_ptr=node_ptr->next)
+	{
+		if (node_ptr->service_time > service_time)
+			service_time = node_ptr->service_time;
+	}
+
+	return service_time;
 }

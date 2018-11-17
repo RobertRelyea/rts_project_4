@@ -14,11 +14,13 @@
 #define QUEUE_H_
 
 // Element inside queue
-// cust_id:       Per-customer identifier
-// teller_id:     Teller that serviced this customer
-// service_time:  Time required by teller to service
-// birth_time:    System time when this customer entered the queue
-// next:          Pointer to the next node in the queue
+// cust_id:          Per-customer identifier
+// teller_id:        Teller that serviced this customer
+// service_time:     Time required by teller to service
+// birth_time:       System time when this customer entered the queue
+// queue_time:       Time spent in the queue by the customer
+// teller_wait_time: Teller idle time before this customer came along
+// next:             Pointer to the next node in the queue
 typedef struct node_t
 {
 	int cust_id;
@@ -26,6 +28,7 @@ typedef struct node_t
 	useconds_t service_time;
 	struct timespec birth_time;
 	double queue_time;
+	double teller_wait_time;
 	struct node_t* next;
 }node;
 
@@ -52,5 +55,11 @@ void print_queue (queue *queue_ptr);
 
 // Queue statistics functions
 int teller_served(queue* queue_ptr, int teller_id);
+double average_queue_time(queue* queue_ptr);
+double average_service_time(queue* queue_ptr);
+double max_queue_time(queue* queue_ptr);
+double average_teller_wait_time(queue* queue_ptr);
+double max_teller_wait_time(queue* queue_ptr);
+double max_service_time(queue* queue_ptr);
 
 #endif /* QUEUE_H_ */
