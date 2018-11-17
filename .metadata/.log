@@ -1,263 +1,52 @@
-!SESSION 2018-10-31 15:53:16.828 -----------------------------------------------
+!SESSION 2018-11-16 17:21:38.616 -----------------------------------------------
 eclipse.buildId=201006232051
 java.version=1.5.0_11
 java.vendor=Sun Microsystems Inc.
 BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
 Command-line arguments:  -os win32 -ws win32 -arch x86
 
-!ENTRY org.eclipse.equinox.p2.repository 4 0 2018-10-31 15:53:17.589
+!ENTRY org.eclipse.equinox.p2.repository 4 0 2018-11-16 17:21:39.104
 !MESSAGE ProvisioningEventBus could not be obtained. Metadata caches may not be cleaned up properly.
 
-!ENTRY org.eclipse.ui.workbench 2 0 2018-10-31 15:53:39.357
+!ENTRY org.eclipse.ui.workbench 2 0 2018-11-16 17:21:43.135
 !MESSAGE A handler conflict occurred.  This may disable some commands.
-!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2018-10-31 15:53:39.357
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2018-11-16 17:21:43.135
 !MESSAGE Conflict for 'AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction':
 HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
 	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
-	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@caf083),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@caf083)),sourcePriority=16640)
+	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@1cc5461),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@1cc5461)),sourcePriority=16640)
 HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
 	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
-	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@caf083),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@caf083)),sourcePriority=16640)
+	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@1cc5461),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@1cc5461)),sourcePriority=16640)
 
-!ENTRY org.eclipse.cdt.core 1 0 2018-10-31 15:55:17.786
-!MESSAGE Indexed 'project_4' (1 sources, 25 headers) in 0.83 sec: 1,256 declarations; 965 references; 3 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
-!SESSION 2018-11-05 15:22:37.604 -----------------------------------------------
-eclipse.buildId=201006232051
-java.version=1.5.0_11
-java.vendor=Sun Microsystems Inc.
-BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
-Command-line arguments:  -os win32 -ws win32 -arch x86
+!ENTRY org.eclipse.cdt.core 1 0 2018-11-16 17:23:43.532
+!MESSAGE Indexed 'project_4' (2 sources, 59 headers) in 1.26 sec: 3,702 declarations; 2,690 references; 3 unresolved inclusions; 0 syntax errors; 4 unresolved names (0.06%)
 
-!ENTRY org.eclipse.equinox.p2.repository 4 0 2018-11-05 15:22:39.127
-!MESSAGE ProvisioningEventBus could not be obtained. Metadata caches may not be cleaned up properly.
-
-!ENTRY org.eclipse.ui 4 4 2018-11-05 15:22:50.759
-!MESSAGE Could not create view: 'org.eclipse.ui.internal.introview'.
-
-!ENTRY org.eclipse.ui.workbench 2 0 2018-11-05 15:22:54.253
-!MESSAGE A handler conflict occurred.  This may disable some commands.
-!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2018-11-05 15:22:54.253
-!MESSAGE Conflict for 'AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction':
-HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
-	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
-	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@7fc8b2),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@7fc8b2)),sourcePriority=16640)
-HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
-	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
-	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@7fc8b2),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@7fc8b2)),sourcePriority=16640)
-
-!ENTRY org.eclipse.ui 4 0 2018-11-05 15:22:54.347
-!MESSAGE Problems occurred restoring workbench.
-!SUBENTRY 1 org.eclipse.ui 0 0 2018-11-05 15:22:54.347
-!MESSAGE 
-!SUBENTRY 1 org.eclipse.core.runtime 0 0 2018-11-05 15:22:54.347
-!MESSAGE OK
-!SUBENTRY 1 org.eclipse.core.runtime 0 0 2018-11-05 15:22:54.347
-!MESSAGE OK
-!SUBENTRY 1 org.eclipse.core.runtime 0 0 2018-11-05 15:22:54.347
-!MESSAGE OK
-!SUBENTRY 1 org.eclipse.ui 4 0 2018-11-05 15:22:54.347
-!MESSAGE Unable to restore perspective: Workspace - C/C++.
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-05 15:22:54.348
-!MESSAGE Problems occurred restoring perspective.
-!SUBENTRY 3 org.eclipse.ui 0 0 2018-11-05 15:22:54.348
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-05 15:22:54.348
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-05 15:22:54.348
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-05 15:22:54.348
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-05 15:22:54.348
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-05 15:22:54.348
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-05 15:22:54.348
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-05 15:22:54.348
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-05 15:22:54.348
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-05 15:22:54.348
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-05 15:22:54.348
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-05 15:22:54.348
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 4 0 2018-11-05 15:22:54.348
-!MESSAGE Could not find view: org.eclipse.ui.internal.introview
-!SUBENTRY 1 org.eclipse.core.runtime 0 0 2018-11-05 15:22:54.348
-!MESSAGE OK
-!SESSION 2018-11-07 15:00:55.958 -----------------------------------------------
-eclipse.buildId=201006232051
-java.version=1.5.0_11
-java.vendor=Sun Microsystems Inc.
-BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
-Command-line arguments:  -os win32 -ws win32 -arch x86
-
-!ENTRY org.eclipse.equinox.registry 2 0 2018-11-07 15:01:12.778
-!MESSAGE The extensions and extension-points from the bundle "com.qnx.doc.ide.userguide" are ignored. The bundle is not marked as singleton. 
-
-!ENTRY org.eclipse.core.resources 2 10035 2018-11-07 15:01:48.039
-!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
-
-!ENTRY org.eclipse.ui 4 4 2018-11-07 15:01:55.061
-!MESSAGE Could not create view: 'org.eclipse.ui.internal.introview'.
-
-!ENTRY org.eclipse.ui.workbench 2 0 2018-11-07 15:02:04.376
-!MESSAGE A handler conflict occurred.  This may disable some commands.
-!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2018-11-07 15:02:04.376
-!MESSAGE Conflict for 'AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction':
-HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
-	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
-	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@805298),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@805298)),sourcePriority=16640)
-HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
-	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
-	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@805298),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@805298)),sourcePriority=16640)
-
-!ENTRY org.eclipse.ui 4 0 2018-11-07 15:02:04.479
-!MESSAGE Problems occurred restoring workbench.
-!SUBENTRY 1 org.eclipse.ui 0 0 2018-11-07 15:02:04.480
-!MESSAGE 
-!SUBENTRY 1 org.eclipse.core.runtime 0 0 2018-11-07 15:02:04.480
-!MESSAGE OK
-!SUBENTRY 1 org.eclipse.core.runtime 0 0 2018-11-07 15:02:04.480
-!MESSAGE OK
-!SUBENTRY 1 org.eclipse.core.runtime 0 0 2018-11-07 15:02:04.480
-!MESSAGE OK
-!SUBENTRY 1 org.eclipse.ui 4 0 2018-11-07 15:02:04.480
-!MESSAGE Unable to restore perspective: Workspace - C/C++.
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-07 15:02:04.480
-!MESSAGE Problems occurred restoring perspective.
-!SUBENTRY 3 org.eclipse.ui 0 0 2018-11-07 15:02:04.480
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-07 15:02:04.480
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-07 15:02:04.480
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-07 15:02:04.480
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-07 15:02:04.480
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-07 15:02:04.480
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-07 15:02:04.480
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-07 15:02:04.480
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-07 15:02:04.480
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-07 15:02:04.480
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-07 15:02:04.480
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-07 15:02:04.480
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 4 0 2018-11-07 15:02:04.480
-!MESSAGE Could not find view: org.eclipse.ui.internal.introview
-!SUBENTRY 1 org.eclipse.core.runtime 0 0 2018-11-07 15:02:04.480
-!MESSAGE OK
-!SESSION 2018-11-12 15:12:09.441 -----------------------------------------------
-eclipse.buildId=201006232051
-java.version=1.5.0_11
-java.vendor=Sun Microsystems Inc.
-BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
-Command-line arguments:  -os win32 -ws win32 -arch x86
-
-!ENTRY org.eclipse.equinox.p2.repository 4 0 2018-11-12 15:12:09.951
-!MESSAGE ProvisioningEventBus could not be obtained. Metadata caches may not be cleaned up properly.
-
-!ENTRY org.eclipse.core.resources 2 10035 2018-11-12 15:12:11.682
-!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
-
-!ENTRY org.eclipse.ui 4 4 2018-11-12 15:12:15.963
-!MESSAGE Could not create view: 'org.eclipse.ui.internal.introview'.
-
-!ENTRY org.eclipse.ui.workbench 2 0 2018-11-12 15:12:17.295
-!MESSAGE A handler conflict occurred.  This may disable some commands.
-!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2018-11-12 15:12:17.295
-!MESSAGE Conflict for 'AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction':
-HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
-	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
-	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@18abc7b),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@18abc7b)),sourcePriority=16640)
-HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
-	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
-	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@18abc7b),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@18abc7b)),sourcePriority=16640)
-
-!ENTRY org.eclipse.ui 4 0 2018-11-12 15:12:17.381
-!MESSAGE Problems occurred restoring workbench.
-!SUBENTRY 1 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
-!MESSAGE 
-!SUBENTRY 1 org.eclipse.core.runtime 0 0 2018-11-12 15:12:17.381
-!MESSAGE OK
-!SUBENTRY 1 org.eclipse.core.runtime 0 0 2018-11-12 15:12:17.381
-!MESSAGE OK
-!SUBENTRY 1 org.eclipse.core.runtime 0 0 2018-11-12 15:12:17.381
-!MESSAGE OK
-!SUBENTRY 1 org.eclipse.ui 4 0 2018-11-12 15:12:17.381
-!MESSAGE Unable to restore perspective: Workspace - C/C++.
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
-!MESSAGE Problems occurred restoring perspective.
-!SUBENTRY 3 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 0 0 2018-11-12 15:12:17.381
-!MESSAGE 
-!SUBENTRY 2 org.eclipse.ui 4 0 2018-11-12 15:12:17.381
-!MESSAGE Could not find view: org.eclipse.ui.internal.introview
-!SUBENTRY 1 org.eclipse.core.runtime 0 0 2018-11-12 15:12:17.381
-!MESSAGE OK
-
-!ENTRY org.eclipse.cdt.ui 4 4 2018-11-12 16:25:02.177
+!ENTRY org.eclipse.cdt.ui 4 4 2018-11-16 18:58:31.691
 !MESSAGE Error
 !STACK 0
-org.eclipse.jface.text.BadLocationException
-	at org.eclipse.jface.text.AbstractDocument.get(AbstractDocument.java:1004)
-	at org.eclipse.core.internal.filebuffers.SynchronizableDocument.get(SynchronizableDocument.java:140)
-	at org.eclipse.cdt.internal.ui.editor.CEditor$BracketInserter.isInsideStringInPreprocessorDirective(CEditor.java:715)
-	at org.eclipse.cdt.internal.ui.editor.CEditor$BracketInserter.verifyKey(CEditor.java:645)
-	at org.eclipse.jface.text.TextViewer$VerifyKeyListenersManager.verifyKey(TextViewer.java:489)
-	at org.eclipse.swt.custom.StyledTextListener.handleEvent(StyledTextListener.java:62)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1027)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1012)
-	at org.eclipse.swt.widgets.Widget.notifyListeners(Widget.java:770)
-	at org.eclipse.swt.custom.StyledText.handleKeyDown(StyledText.java:5840)
-	at org.eclipse.swt.custom.StyledText$7.handleEvent(StyledText.java:5542)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1027)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1012)
-	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1040)
-	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1036)
-	at org.eclipse.swt.widgets.Widget.wmChar(Widget.java:1368)
-	at org.eclipse.swt.widgets.Control.WM_CHAR(Control.java:4053)
-	at org.eclipse.swt.widgets.Canvas.WM_CHAR(Canvas.java:346)
-	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3946)
-	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:342)
-	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4619)
-	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
-	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2411)
-	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3501)
+java.lang.ClassCastException: org.eclipse.cdt.internal.core.dom.parser.c.CASTElaboratedTypeSpecifier
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.findDeclarationOwner(CPPVisitor.java:2095)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.findNameOwner(CPPVisitor.java:2064)
+	at org.eclipse.cdt.internal.core.dom.parser.ProblemBinding.getOwner(ProblemBinding.java:250)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.AccessContext.isAccessible(AccessContext.java:75)
+	at org.eclipse.cdt.internal.ui.text.contentassist.DOMCompletionProposalComputer.computeCompletionProposals(DOMCompletionProposalComputer.java:139)
+	at org.eclipse.cdt.internal.ui.text.contentassist.ParsingBasedProposalComputer.computeCompletionProposals(ParsingBasedProposalComputer.java:55)
+	at org.eclipse.cdt.internal.ui.text.contentassist.CompletionProposalComputerDescriptor.computeCompletionProposals(CompletionProposalComputerDescriptor.java:300)
+	at org.eclipse.cdt.internal.ui.text.contentassist.CompletionProposalCategory.computeCompletionProposals(CompletionProposalCategory.java:261)
+	at org.eclipse.cdt.internal.ui.text.contentassist.ContentAssistProcessor.collectProposals(ContentAssistProcessor.java:267)
+	at org.eclipse.cdt.internal.ui.text.contentassist.ContentAssistProcessor.computeCompletionProposals(ContentAssistProcessor.java:220)
+	at org.eclipse.jface.text.contentassist.ContentAssistant.computeCompletionProposals(ContentAssistant.java:1832)
+	at org.eclipse.jface.text.contentassist.CompletionProposalPopup.computeProposals(CompletionProposalPopup.java:556)
+	at org.eclipse.jface.text.contentassist.CompletionProposalPopup.access$16(CompletionProposalPopup.java:553)
+	at org.eclipse.jface.text.contentassist.CompletionProposalPopup$2.run(CompletionProposalPopup.java:488)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+	at org.eclipse.jface.text.contentassist.CompletionProposalPopup.showProposals(CompletionProposalPopup.java:482)
+	at org.eclipse.jface.text.contentassist.ContentAssistant$2.run(ContentAssistant.java:376)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:134)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3885)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3506)
 	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2405)
 	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2369)
 	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2221)
@@ -278,96 +67,3 @@ org.eclipse.jface.text.BadLocationException
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:559)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:514)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1311)
-
-!ENTRY org.eclipse.cdt.ui 4 4 2018-11-12 16:25:03.777
-!MESSAGE Error
-!STACK 0
-org.eclipse.jface.text.BadLocationException
-	at org.eclipse.jface.text.AbstractDocument.get(AbstractDocument.java:1004)
-	at org.eclipse.core.internal.filebuffers.SynchronizableDocument.get(SynchronizableDocument.java:140)
-	at org.eclipse.cdt.internal.ui.editor.CEditor$BracketInserter.isInsideStringInPreprocessorDirective(CEditor.java:715)
-	at org.eclipse.cdt.internal.ui.editor.CEditor$BracketInserter.verifyKey(CEditor.java:645)
-	at org.eclipse.jface.text.TextViewer$VerifyKeyListenersManager.verifyKey(TextViewer.java:489)
-	at org.eclipse.swt.custom.StyledTextListener.handleEvent(StyledTextListener.java:62)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1027)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1012)
-	at org.eclipse.swt.widgets.Widget.notifyListeners(Widget.java:770)
-	at org.eclipse.swt.custom.StyledText.handleKeyDown(StyledText.java:5840)
-	at org.eclipse.swt.custom.StyledText$7.handleEvent(StyledText.java:5542)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1003)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1027)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1012)
-	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1040)
-	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1036)
-	at org.eclipse.swt.widgets.Widget.wmChar(Widget.java:1368)
-	at org.eclipse.swt.widgets.Control.WM_CHAR(Control.java:4053)
-	at org.eclipse.swt.widgets.Canvas.WM_CHAR(Canvas.java:346)
-	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3946)
-	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:342)
-	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4619)
-	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
-	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2411)
-	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3501)
-	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2405)
-	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2369)
-	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2221)
-	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:500)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
-	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:493)
-	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
-	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:113)
-	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:194)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:368)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:559)
-	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:514)
-	at org.eclipse.equinox.launcher.Main.run(Main.java:1311)
-!SESSION 2018-11-14 14:32:29.325 -----------------------------------------------
-eclipse.buildId=201006232051
-java.version=1.5.0_11
-java.vendor=Sun Microsystems Inc.
-BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
-Command-line arguments:  -os win32 -ws win32 -arch x86
-
-!ENTRY org.eclipse.equinox.p2.repository 4 0 2018-11-14 14:32:30.317
-!MESSAGE ProvisioningEventBus could not be obtained. Metadata caches may not be cleaned up properly.
-
-!ENTRY org.eclipse.ui.workbench 2 0 2018-11-14 14:32:39.356
-!MESSAGE A handler conflict occurred.  This may disable some commands.
-!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2018-11-14 14:32:39.356
-!MESSAGE Conflict for 'AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction':
-HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
-	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
-	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@1e2c9bf),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@1e2c9bf)),sourcePriority=16640)
-HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
-	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
-	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@1e2c9bf),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@1e2c9bf)),sourcePriority=16640)
-!SESSION 2018-11-15 17:21:53.196 -----------------------------------------------
-eclipse.buildId=201006232051
-java.version=1.5.0_11
-java.vendor=Sun Microsystems Inc.
-BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
-Command-line arguments:  -os win32 -ws win32 -arch x86
-
-!ENTRY org.eclipse.equinox.p2.repository 4 0 2018-11-15 17:21:54.195
-!MESSAGE ProvisioningEventBus could not be obtained. Metadata caches may not be cleaned up properly.
-
-!ENTRY org.eclipse.ui.workbench 2 0 2018-11-15 17:22:11.129
-!MESSAGE A handler conflict occurred.  This may disable some commands.
-!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2018-11-15 17:22:11.129
-!MESSAGE Conflict for 'AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction':
-HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
-	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
-	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@1e2c9bf),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@1e2c9bf)),sourcePriority=16640)
-HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
-	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
-	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@1e2c9bf),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@1e2c9bf)),sourcePriority=16640)

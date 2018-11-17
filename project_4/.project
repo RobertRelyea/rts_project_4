@@ -67,5 +67,6 @@
 	<natures>
 		<nature>org.eclipse.cdt.core.cnature</nature>
 		<nature>com.qnx.tools.ide.qde.core.qnxnature</nature>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
 	</natures>
 </projectDescription>
