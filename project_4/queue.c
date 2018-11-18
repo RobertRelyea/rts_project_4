@@ -196,5 +196,5 @@ double max_service_time(queue* queue_ptr)
 			service_time = node_ptr->service_time;
 	}
 
-	return service_time;
+	return service_time / 1e6;
 }

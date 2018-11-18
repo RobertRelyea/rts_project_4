@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include "queue.h"
 
-#define NUM_TELLERS (3)
+#define NUM_TELLERS (2)
 #define SIM_TIME (42) // 7 hr * 60 mins/hr * 0.1 seconds/min = 42
 
 // Shared variable mutexes
@@ -16,7 +16,6 @@ pthread_mutex_t cust_locker;
 pthread_mutex_t old_cust_locker;
 
 // Semaphores
-sem_t cust_count_sem;
 sem_t bank_closed;
 
 // Customer Queues
@@ -34,7 +33,11 @@ struct teller_status
 	int is_free;
 	int on_break;
 	int breaks;
+	int longest_break;
+	int shortest_break;
+	int total_break;
 	sem_t wake;
+	sem_t assigned;
 	pthread_mutex_t thread_status_locker;
 };
 struct teller_status teller_status_array[NUM_TELLERS];
@@ -87,7 +90,7 @@ void print_stats()
 			max_teller_wait_time(old_cust_queue));
 	// 8
 	printf("Maximum customer service time: %f seconds\n",
-			max_teller_wait_time(old_cust_queue));
+			max_service_time(old_cust_queue));
 	// 9
 	printf("Maximum customer queue depth: %d customers\n",
 			max_queue_depth);
@@ -99,6 +102,31 @@ void print_stats()
 		printf("Teller %d break number: %d\n", teller_idx + 1, breaks);
 
 	}
+	//11
+
+		for(teller_idx=0;teller_idx < NUM_TELLERS ;teller_idx++)
+		{
+			double shortest_break = (double)(teller_status_array[teller_idx].shortest_break)/1000000;
+			printf("Teller %d's shortest break: %f seconds\n", teller_idx + 1, shortest_break);
+
+		}
+	//12
+
+		for(teller_idx=0;teller_idx < NUM_TELLERS ;teller_idx++)
+		{
+			double longest_break =(double)( teller_status_array[teller_idx].longest_break)/1000000;
+			printf("Teller %d's longest break: %f seconds \n", teller_idx + 1, longest_break);
+
+		}
+	//13
+
+		for(teller_idx=0;teller_idx < NUM_TELLERS ;teller_idx++)
+		{
+			double avg_break = ((teller_status_array[teller_idx].total_break)/(double)(teller_status_array[teller_idx].breaks))/1000000;
+			printf("Teller %d's average break : %f seconds\n" , teller_idx + 1, avg_break);
+
+		}
+
 }
 
 
@@ -136,7 +164,6 @@ useconds_t gen_break_length()
 }
 
 // Initialize all status members for each teller.
-//
 void initializeTellerStatuses()
 {
 	int teller_idx = 0;
@@ -150,10 +177,14 @@ void initializeTellerStatuses()
 		teller_status_array[teller_idx].is_free = 1;
 		teller_status_array[teller_idx].on_break = 0;
 		teller_status_array[teller_idx].breaks = 0;
+		teller_status_array[teller_idx].longest_break = 0;
+		teller_status_array[teller_idx].shortest_break = 600000;
+		teller_status_array[teller_idx].total_break = 0;
 		// Struct access mutex
 		pthread_mutex_init(&teller_status_array[teller_idx].thread_status_locker,NULL);
 		// Teller thread wake semaphore
 		sem_init(&teller_status_array[teller_idx].wake, 0, 0);
+		sem_init(&teller_status_array[teller_idx].assigned, 0, 0);
 	}
 }
 
@@ -164,35 +195,36 @@ void *teller (void *arg)
 	struct teller_args *my_args;
 	my_args = (struct teller_args *) arg;
 
+	double wait_time = 0;
+
+
+	// Track teller waiting time
+	clock_gettime(CLOCK_REALTIME, &start);
 
 	// Run teller thread
 	while(1)
 	{
 		// Wait until we get a wake signal
-//		printf("Waiting for wake on teller %d\n", my_args->teller_id);
 		sem_wait(&teller_status_array[my_args->teller_id - 1].wake);
-//		printf("Wake received on teller %d\n", my_args->teller_id);
 
-		// Retrieve current time
-		clock_gettime(CLOCK_REALTIME, &current);
+		// Not on break, check if customer is waiting
+
 
 		int bank_closed_val = 0;
-		int cust_count_val = 0;
+		int assigned_val = 0;
 
 		sem_getvalue(&bank_closed, &bank_closed_val);
-		sem_getvalue(&cust_count_sem, &cust_count_val);
+		sem_getvalue(&teller_status_array[my_args->teller_id - 1].assigned, &assigned_val);
 
-		if(bank_closed_val && cust_count_val == 0)
+		if(bank_closed_val && assigned_val == 0)
 		{
 			// Exit thread
-			printf("Teller %d exiting\n", my_args->teller_id);
 			return;
 		}
 
 		// Check if we are on break
-		if ((time_elapsed(&teller_status_array[my_args->teller_id - 1].next_break,&current) >= 0))
+		if (teller_status_array[my_args->teller_id - 1].on_break)
 		{
-			printf("Teller %d going on break\n", my_args->teller_id );
 			// Load break time
 			pthread_mutex_lock(&teller_status_array[my_args->teller_id - 1].thread_status_locker);
 			useconds_t break_length = teller_status_array[my_args->teller_id - 1].break_length;
@@ -200,32 +232,33 @@ void *teller (void *arg)
 
 			// Sleep for break
 			usleep(break_length);
+			wait_time -= (double)(break_length) / 1e6;
 
 			// Update on_break status
 			pthread_mutex_lock(&teller_status_array[my_args->teller_id - 1].thread_status_locker);
 			teller_status_array[my_args->teller_id - 1].on_break = 0;
 			teller_status_array[my_args->teller_id - 1].breaks++;
+			teller_status_array[my_args->teller_id - 1].total_break += break_length;
+
+			if(teller_status_array[my_args->teller_id - 1].longest_break < break_length)
+				teller_status_array[my_args->teller_id - 1].longest_break = break_length;
+
+			if(teller_status_array[my_args->teller_id - 1].shortest_break > break_length)
+				teller_status_array[my_args->teller_id - 1].shortest_break = break_length;
+
 			gen_break_time(&teller_status_array[my_args->teller_id - 1].next_break);
 			teller_status_array[my_args->teller_id - 1].break_length = gen_break_length();
 
 			pthread_mutex_unlock(&teller_status_array[my_args->teller_id - 1].thread_status_locker);
-
-			printf("Teller %d off break\n", my_args->teller_id );
-
 			// Go back to waiting for wake signal
 			continue;
 		}
 
-		// Not on break, check if customer is waiting
 
-		// Track teller waiting time
-		clock_gettime(CLOCK_REALTIME, &start); // ChANGE ME
 
 
 		// Wait until a customer is available
-//		printf("Waiting for customer on teller %d\n", my_args->teller_id);
-		sem_wait(&cust_count_sem);
-
+		sem_wait(&teller_status_array[my_args->teller_id - 1].assigned);
 		// Set is_free status to 0
 		pthread_mutex_lock(&teller_status_array[my_args->teller_id - 1].thread_status_locker);
 		teller_status_array[my_args->teller_id - 1].is_free = 0;
@@ -241,7 +274,8 @@ void *teller (void *arg)
 		// Update customer time statistics
 		customer->queue_time = time_elapsed(&(customer->birth_time),
 											&current);
-		customer->teller_wait_time = time_elapsed(&start, &current);
+		customer->teller_wait_time = time_elapsed(&start, &current) + wait_time;
+		wait_time = 0;
 
 		// Process customer
 		usleep(customer->service_time);
@@ -259,6 +293,8 @@ void *teller (void *arg)
 		teller_status_array[my_args->teller_id - 1].is_free = 1;
 		pthread_mutex_unlock(&teller_status_array[my_args->teller_id - 1].thread_status_locker);
 
+		// Track teller waiting time
+		clock_gettime(CLOCK_REALTIME, &start);
 	}
 }
 
@@ -269,7 +305,6 @@ int main(int argc, char *argv[])
 	pthread_mutex_init(&old_cust_locker,NULL);
 
 	// Initialize Semaphores
-	sem_init(&cust_count_sem, 0, 0);
 	sem_init(&bank_closed, 0, 0);
 
 	// Initialize queues
@@ -353,11 +388,7 @@ int main(int argc, char *argv[])
 
 			pthread_mutex_unlock(&cust_locker);
 
-			// Post to cust_count semaphore
-			sem_post(&cust_count_sem);
-//			int sem_value = 0;
-//			sem_getvalue(&cust_count_sem, &sem_value);
-//			printf("Cust count: %d\n", sem_value);
+
 			int wake_sent =0;
 
 			for(teller_idx = 0;teller_idx < NUM_TELLERS ;teller_idx++)
@@ -367,6 +398,7 @@ int main(int argc, char *argv[])
 				if (teller_status_array[teller_idx].is_free &&
 					teller_status_array[teller_idx].on_break <= 0 && wake_sent != 1)
 				{
+					sem_post (&teller_status_array[teller_idx].assigned);
 					sem_post(&teller_status_array[teller_idx].wake);
 					teller_status_array[teller_idx].is_free = 0;
 					wake_sent =1;
@@ -380,6 +412,7 @@ int main(int argc, char *argv[])
 				pthread_mutex_lock(&teller_status_array[teller_idx].thread_status_locker);
 				// Generate a teller index between 1 and NUM_TELLERS
 				int teller_num = (rand()%(NUM_TELLERS));
+				sem_post(&teller_status_array[teller_num].assigned);
 				sem_post(&teller_status_array[teller_num].wake);
 				wake_sent=1;
 				pthread_mutex_unlock(&teller_status_array[teller_idx].thread_status_locker);
@@ -395,55 +428,23 @@ int main(int argc, char *argv[])
 	printf("Bank Closed!\n");
 	sem_post(&bank_closed);
 
-
 	// Close bank
 	for(teller_idx = 0;teller_idx < NUM_TELLERS ;teller_idx++)
 	{
-		pthread_mutex_lock(&teller_status_array[teller_idx].thread_status_locker);
 		// If the teller flag is set, wake the teller
 		sem_post(&teller_status_array[teller_idx].wake);
-		pthread_mutex_unlock(&teller_status_array[teller_idx].thread_status_locker);
 	}
 
-//
-//	pthread_mutex_lock(&teller_status_array[0].thread_status_locker);
-//	// If the teller flag is set, wake the teller
-//	sem_post(&teller_status_array[0].wake);
-//	pthread_mutex_unlock(&teller_status_array[0].thread_status_locker);
-
-
-
+	// Join all teller threads
 	for(teller_idx = 0;teller_idx < NUM_TELLERS; ++teller_idx)
 	{
 		pthread_join(teller_threads[teller_idx], NULL);
-		printf("Teller %d joined\n", teller_idx + 1);
 	}
 
 	pthread_mutex_lock(&cust_locker);
 	pthread_mutex_lock(&old_cust_locker);
 
-	printf("\nCustomer Queue:\n");
-	print_queue(cust_queue);
-
-	printf("\nServed Customer Queue:\n");
-	print_queue(old_cust_queue);
-
 	print_stats();
-
-	//	usleep(1e6);
-
-	int sem_value = 0;
-	sem_getvalue(&cust_count_sem, &sem_value);
-	printf("Cust count: %d\n", sem_value);
-	sem_getvalue(&teller_status_array[0].wake, &sem_value);
-	printf("Teller 1 wake: %d\n", sem_value);
-	sem_getvalue(&teller_status_array[1].wake, &sem_value);
-	printf("Teller 2 wake: %d\n", sem_value);
-	sem_getvalue(&teller_status_array[2].wake, &sem_value);
-	printf("Teller 3 wake: %d\n", sem_value);
-	usleep(1e5);
-	usleep(1e5);
-	usleep(1e5);
 
 	free_queue(old_cust_queue);
 	free_queue(cust_queue);
