@@ -75,22 +75,22 @@ void print_stats()
 	}
 	// 3
 	printf("Average customer queue time: %f seconds\n",
-			average_queue_time(old_cust_queue));
+			average_queue_time(old_cust_queue) * 600);
 	// 4
 	printf("Average customer service time: %f seconds\n",
-			average_service_time(old_cust_queue));
+			average_service_time(old_cust_queue) * 600);
 	// 5
 	printf("Average teller wait time: %f seconds\n",
-			average_teller_wait_time(old_cust_queue));
+			average_teller_wait_time(old_cust_queue) * 600);
 	// 6
 	printf("Maximum customer queue time: %f seconds\n",
-			max_queue_time(old_cust_queue));
+			max_queue_time(old_cust_queue) * 600);
 	// 7
 	printf("Maximum teller wait time: %f seconds\n",
-			max_teller_wait_time(old_cust_queue));
+			max_teller_wait_time(old_cust_queue) * 600);
 	// 8
 	printf("Maximum customer service time: %f seconds\n",
-			max_service_time(old_cust_queue));
+			max_service_time(old_cust_queue) * 600);
 	// 9
 	printf("Maximum customer queue depth: %d customers\n",
 			max_queue_depth);
@@ -100,15 +100,17 @@ void print_stats()
 	{
 		int breaks = teller_status_array[teller_idx].breaks;
 		printf("Teller %d break number: %d\n", teller_idx + 1, breaks);
+		if (breaks != 0)
+		{
+			double shortest_break = (double)(teller_status_array[teller_idx].shortest_break)/1000000;
+			printf("\tTeller %d's shortest break: %f seconds\n", teller_idx + 1, shortest_break * 600);
 
-		double shortest_break = (double)(teller_status_array[teller_idx].shortest_break)/1000000;
-		printf("\tTeller %d's shortest break: %f seconds\n", teller_idx + 1, shortest_break);
+			double longest_break =(double)( teller_status_array[teller_idx].longest_break)/1000000;
+			printf("\tTeller %d's longest break: %f seconds\n", teller_idx + 1, longest_break * 600);
 
-		double longest_break =(double)( teller_status_array[teller_idx].longest_break)/1000000;
-		printf("\tTeller %d's longest break: %f seconds\n", teller_idx + 1, longest_break);
-
-		double avg_break = ((teller_status_array[teller_idx].total_break)/(double)(teller_status_array[teller_idx].breaks))/1000000;
-		printf("\tTeller %d's average break : %f seconds\n" , teller_idx + 1, avg_break);
+			double avg_break = ((teller_status_array[teller_idx].total_break)/(double)(teller_status_array[teller_idx].breaks))/1000000;
+			printf("\tTeller %d's average break : %f seconds\n" , teller_idx + 1, avg_break * 600);
+		}
 
 	}
 
@@ -371,6 +373,10 @@ int main(int argc, char *argv[])
 
 			int wake_sent =0;
 
+
+			// See who is free
+			int num_free_tellers = 0;
+			int free_tellers[NUM_TELLERS];
 			for(teller_idx = 0;teller_idx < NUM_TELLERS ;teller_idx++)
 			{
 				pthread_mutex_lock(&teller_status_array[teller_idx].thread_status_locker);
@@ -378,16 +384,31 @@ int main(int argc, char *argv[])
 				if (teller_status_array[teller_idx].is_free &&
 					teller_status_array[teller_idx].on_break <= 0 && wake_sent != 1)
 				{
-					sem_post (&teller_status_array[teller_idx].assigned);
-					sem_post(&teller_status_array[teller_idx].wake);
-					teller_status_array[teller_idx].is_free = 0;
-					wake_sent =1;
+					free_tellers[num_free_tellers] = teller_idx;
+					num_free_tellers++;
+//					sem_post (&teller_status_array[teller_idx].assigned);
+//					sem_post(&teller_status_array[teller_idx].wake);
+//					teller_status_array[teller_idx].is_free = 0;
+//					wake_sent =1;
 				}
+				pthread_mutex_unlock(&teller_status_array[teller_idx].thread_status_locker);
+			}
+
+
+			if (num_free_tellers != 0)
+			{
+				int teller_to_assign = rand() % num_free_tellers;
+				pthread_mutex_lock(&teller_status_array[teller_idx].thread_status_locker);
+
+				sem_post (&teller_status_array[free_tellers[teller_to_assign]].assigned);
+				sem_post(&teller_status_array[free_tellers[teller_to_assign]].wake);
+				teller_status_array[free_tellers[teller_to_assign]].is_free = 0;
 
 				pthread_mutex_unlock(&teller_status_array[teller_idx].thread_status_locker);
 			}
+
 			// if none of the tellers are free, assign a random teller to the next customer
-			if (wake_sent==0)
+			else
 			{
 				pthread_mutex_lock(&teller_status_array[teller_idx].thread_status_locker);
 				// Generate a teller index between 1 and NUM_TELLERS
