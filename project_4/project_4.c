@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include "queue.h"
 
-#define NUM_TELLERS (2)
+#define NUM_TELLERS (3)
 #define SIM_TIME (42) // 7 hr * 60 mins/hr * 0.1 seconds/min = 42
 
 // Shared variable mutexes
@@ -77,11 +77,11 @@ void print_stats()
 	printf("Average customer queue time: %f seconds\n",
 			average_queue_time(old_cust_queue));
 	// 4
-	printf("Average teller wait time: %f seconds\n",
-			average_teller_wait_time(old_cust_queue));
-	// 5
 	printf("Average customer service time: %f seconds\n",
 			average_service_time(old_cust_queue));
+	// 5
+	printf("Average teller wait time: %f seconds\n",
+			average_teller_wait_time(old_cust_queue));
 	// 6
 	printf("Maximum customer queue time: %f seconds\n",
 			max_queue_time(old_cust_queue));
@@ -101,31 +101,16 @@ void print_stats()
 		int breaks = teller_status_array[teller_idx].breaks;
 		printf("Teller %d break number: %d\n", teller_idx + 1, breaks);
 
+		double shortest_break = (double)(teller_status_array[teller_idx].shortest_break)/1000000;
+		printf("\tTeller %d's shortest break: %f seconds\n", teller_idx + 1, shortest_break);
+
+		double longest_break =(double)( teller_status_array[teller_idx].longest_break)/1000000;
+		printf("\tTeller %d's longest break: %f seconds\n", teller_idx + 1, longest_break);
+
+		double avg_break = ((teller_status_array[teller_idx].total_break)/(double)(teller_status_array[teller_idx].breaks))/1000000;
+		printf("\tTeller %d's average break : %f seconds\n" , teller_idx + 1, avg_break);
+
 	}
-	//11
-
-		for(teller_idx=0;teller_idx < NUM_TELLERS ;teller_idx++)
-		{
-			double shortest_break = (double)(teller_status_array[teller_idx].shortest_break)/1000000;
-			printf("Teller %d's shortest break: %f seconds\n", teller_idx + 1, shortest_break);
-
-		}
-	//12
-
-		for(teller_idx=0;teller_idx < NUM_TELLERS ;teller_idx++)
-		{
-			double longest_break =(double)( teller_status_array[teller_idx].longest_break)/1000000;
-			printf("Teller %d's longest break: %f seconds \n", teller_idx + 1, longest_break);
-
-		}
-	//13
-
-		for(teller_idx=0;teller_idx < NUM_TELLERS ;teller_idx++)
-		{
-			double avg_break = ((teller_status_array[teller_idx].total_break)/(double)(teller_status_array[teller_idx].breaks))/1000000;
-			printf("Teller %d's average break : %f seconds\n" , teller_idx + 1, avg_break);
-
-		}
 
 }
 
@@ -152,7 +137,6 @@ void gen_break_time(struct timespec* ts_ptr)
 	time_t interval = 3 + (rand() % 3); // Between 30 and 60 minutes
 	clock_gettime(CLOCK_REALTIME, ts_ptr);
 	ts_ptr->tv_sec += interval;
-	return ts_ptr;
 }
 
 
@@ -197,7 +181,6 @@ void *teller (void *arg)
 
 	double wait_time = 0;
 
-
 	// Track teller waiting time
 	clock_gettime(CLOCK_REALTIME, &start);
 
@@ -208,14 +191,13 @@ void *teller (void *arg)
 		sem_wait(&teller_status_array[my_args->teller_id - 1].wake);
 
 		// Not on break, check if customer is waiting
-
-
 		int bank_closed_val = 0;
 		int assigned_val = 0;
 
 		sem_getvalue(&bank_closed, &bank_closed_val);
 		sem_getvalue(&teller_status_array[my_args->teller_id - 1].assigned, &assigned_val);
 
+		// Check if bank closed and we have no assigned customers
 		if(bank_closed_val && assigned_val == 0)
 		{
 			// Exit thread
@@ -253,8 +235,6 @@ void *teller (void *arg)
 			// Go back to waiting for wake signal
 			continue;
 		}
-
-
 
 
 		// Wait until a customer is available
